@@ -1,11 +1,108 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/Layout.astro'
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import CarouselItem1 from '../assets/img/bimibm.png'
+import CarouselItem2 from '../assets/img/pips.png'
+import CardImage1 from '../assets/img/Adress-img.png'
+import CardImage2 from '../assets/img/bonus-img.png'
+import CardImage3 from '../assets/img/Menu-img.png'
+import Image from 'astro/components/Image.astro'
 ---
 
 <Layout>
-	<Welcome />
+	<section class='Carousel-Fade'>
+		<div
+			id='carouselExampleFade'
+			class='carousel slide carousel-fade'
+			data-bs-ride='carousel'
+		>
+			<div class='carousel-inner'>
+				<div class='carousel-item active'>
+					<Image
+						src={CarouselItem1}
+						alt='Изображение 1'
+						class='image-carousel d-flex'
+						loading='eager'
+					/>
+				</div>
+				<div class='carousel-item'>
+					<Image
+						src={CarouselItem2}
+						alt='Изображение 2'
+						class='image-carousel d-flex'
+					/>
+				</div>
+			</div>
+			<button
+				class='carousel-control-prev'
+				type='button'
+				data-bs-target='#carouselExampleFade'
+				data-bs-slide='prev'
+			>
+				<span class='carousel-control-prev-icon' aria-hidden='true'></span>
+				<span class='visually-hidden'>Предыдущий</span>
+			</button>
+			<button
+				class='carousel-control-next'
+				type='button'
+				data-bs-target='#carouselExampleFade'
+				data-bs-slide='next'
+			>
+				<span class='carousel-control-next-icon' aria-hidden='true'></span>
+				<span class='visually-hidden'>Следующий</span>
+			</button>
+		</div>
+	</section>
+	<section class='Main m-page'>
+		<h1 class='line-header mt-3'>Главная</h1>
+		<div class='card-container my-3'>
+			<div class='card'>
+				<div class='image-container my-4'>
+					<Image src={CardImage3} alt='Меню' title='Меню' />
+				</div>
+				<div class='text-container mx-4 my-2'>
+					<h2>Наше меню</h2>
+					<h4 class='main-text'>
+						Откройте для себя наше разнообразие кофейных напитков!
+					</h4>
+				</div>
+				<div class='button-container mx-4 my-3'>
+					<a href='menupage.html' class='main-text'> Посмотерть </a>
+				</div>
+			</div>
+			<div class='card'>
+				<div class='image-container my-4'>
+					<Image src={CardImage1} alt='Адрес' title='Адрес' />
+				</div>
+				<div class='text-container mx-4 my-2'>
+					<h2>Адрес кофейни</h2>
+					<h4 class='main-text'>Узнайте как попсать в нашу уютную кофейню</h4>
+				</div>
+				<div class='button-container mx-4 my-3'>
+					<a href='aboutpage.html' class='main-text'> Посмотерть </a>
+				</div>
+			</div>
+			<div class='card'>
+				<div class='image-container my-4'>
+					<Image src={CardImage2} alt='Бонусы' title='Бонусы' />
+				</div>
+				<div class='text-container mx-4 my-2'>
+					<h2>Бонусы</h2>
+					<h4 class='main-text'>
+						Информация о акциях, рассылки и многое другое в нашем телеграмм боте
+					</h4>
+				</div>
+				<div class='button-container mx-4 my-3'>
+					<a href='bonuspage.html' class='main-text'> Посмотерть </a>
+				</div>
+			</div>
+		</div>
+	</section>
 </Layout>
+
+<style>
+	.image-carousel {
+		width: 100% !important;
+		min-height: 1200px;
+	}
+</style>

@@ -1,5 +1,5 @@
 {
-  "name": "harmony-of-teste-frontend",
+  "name": "harmony-of-taste-frontend",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,6 +9,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.9.2"
+    "@tailwindcss/vite": "^4.1.8",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "astro": "^5.9.2",
+    "tailwindcss": "^4.1.8"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

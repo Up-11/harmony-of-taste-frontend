@@ -1,0 +1,168 @@
+.bg-950 {
+	background-color: #342116;
+}
+
+.c-950 {
+	color: #342116;
+}
+
+.bg-900 {
+	background-color: #61412d;
+}
+
+.c-900 {
+	color: #61412d;
+}
+
+.bg-800 {
+	background-color: #774f35;
+}
+
+.c-800 {
+	color: #774f35;
+}
+
+.bg-700 {
+	background-color: #93613b;
+}
+
+.c-700 {
+	color: #93613b;
+}
+
+.bg-600 {
+	background-color: #b17845;
+}
+
+.c-600 {
+	color: #b17845;
+}
+
+.bg-500 {
+	background-color: #bf8d50;
+}
+
+.c-500 {
+	color: #bf8d50;
+}
+
+.bg-400 {
+	background-color: #caa36d;
+}
+
+.c-400 {
+	color: #caa36d;
+}
+
+.bg-300 {
+	background-color: #dac297;
+}
+
+.c-300 {
+	color: #dac297;
+}
+
+.bg-200 {
+	background-color: #ebdfc7;
+}
+
+.c-200 {
+	color: #ebdfc7;
+}
+
+.bg-100 {
+	background-color: #f4eee0;
+}
+
+.c-100 {
+	color: #f4eee0;
+}
+
+.bg-50 {
+	background-color: #faf7f2;
+}
+
+.c-50 {
+	color: #faf7f2;
+}
+
+.map-container a:active,
+.map-container a:focus,
+.map-container a:hover {
+	color: #61412d;
+}
+.map-container .map-content {
+	margin: 0 6em;
+}
+.map-container .map-head {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+.map-container .map-head h5 {
+	margin-top: 10px;
+}
+.map-container .address {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+.map-container #map {
+	width: 100%;
+	height: 300px;
+}
+@media (max-width: 1200px) {
+	.map-container .map-content {
+		margin: 0;
+	}
+
+	.map-container .map-head {
+		margin: 0.5em 2em;
+		flex-direction: column;
+	}
+	.map-container .address {
+		margin: auto;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		text-align: center;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+}
+
+#routeButton {
+	color: #caa36d;
+	-webkit-transition: all 0.15s ease-in-out;
+	transition: all 0.15s ease-in-out;
+	cursor: pointer;
+}
+
+#routeButton:hover {
+	color: #61412d;
+}
+.mail {
+	text-decoration: underline;
+}
+.column {
+	margin-top: 1.5em;
+}

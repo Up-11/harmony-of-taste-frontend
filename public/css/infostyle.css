@@ -1,0 +1,26 @@
+.page {
+	display: flex;
+	flex-direction: row;
+
+	margin-top: 5%;
+}
+.info-container {
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.info-item {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	padding: 0.3em 1em;
+}
+.info-item > a {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+.info-item > a > h2 {
+	text-decoration: underline;
+}
