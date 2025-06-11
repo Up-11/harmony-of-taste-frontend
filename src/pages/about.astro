@@ -3,7 +3,77 @@ import Layout from '../layouts/Layout.astro'
 
 ---
 
-<Layout>
-<div>about</div>
+<Layout title='О нас'>
+    <section class="map-container mt-5">
+        <div class="map-content">
+            <div class="map-head line-header mb-4">
+                <h1>Мы на 2GIS</h1>
+                <h5><a href="" id="routeButton">Построить маршрут</a></h5>
+            </div>
+            
+            <div id="map"></div>
+            <div class="address my-5">
+                <div class="column">
+                    <h2 class="my-2 line">Красноярск</h2>
+                    <h5 class="my-2">ул.Петра Подзолкова, 10</h5>
+                </div>
+                <div class="column">
+                    <h2 class="my-2 line">Электронная почта</h2>
+                    <h5 class="my-2">
+                        <a href="mailto:yura.kolgin@yandex.ru" class="mail"
+                            >DG112@email.ru</a
+                        >
+                    </h5>
+                </div>
+                <div class="column">
+                    <h2 class="my-2 line">Телефон</h2>
+                    <h5 class="my-2">8 (900) 761 23 12</h5>
+                </div>
+                <div class="column">
+                    <h2 class="my-2 line">Часы работы</h2>
+                    <h5 class="my-2">пн-сб - 9:00 - 18:00</h5>
+                    <h5 class="my-2">сб-вс - 12:00 - 18:00</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+   
 </Layout>
 
+
+<script>
+if (typeof window !== 'undefined') {
+    const endPoint = [56.054693, 92.888828];
+
+    function load2GIS(callback) {
+        const script = document.createElement('script');
+        script.src = 'https://maps.api.2gis.ru/2.0/loader.js?pkg=full';
+        script.onload = callback;
+        document.head.appendChild(script);
+    }
+
+    load2GIS(() => {
+        DG.then(function () {
+            const map = DG.map('map', {
+                center: endPoint,
+                zoom: 13,
+            });
+
+            DG.marker(endPoint)
+                .addTo(map)
+                .bindPopup('ул. Петра Подзолкова 10 || Гармония вкуса');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('routeButton');
+        if (btn) {
+            btn.addEventListener('click', event => {
+                event.preventDefault();
+                const url = `https://2gis.ru/krasnoyarsk/search/Гармония%20вкуса%20кофе%20и%20десерты/firm/70000001089549919/92.889704%2C56.054458?m=92.831925%2C56.005415%2F11`;
+                window.location.href = url;
+            });
+        }
+    });
+}
+</script>

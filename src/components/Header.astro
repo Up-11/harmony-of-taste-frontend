@@ -2,13 +2,28 @@
 import Image from 'astro/components/Image.astro'
 import CoffeeIcon from '../assets/img/Coffee.svg'
 import { ROUTES } from '../config/routes'
+import Profile from '../icons/Profile.astro'
+import Cart from '../icons/Cart.astro'
 
+const links = [
+	{
+		route: ROUTES.MENU,
+		title: 'Меню'
+	},
+	{
+		route: ROUTES.ABOUT,
+		title: 'О нас'
+	}
+]
 
+const url = Astro.url.pathname
+
+console.log(url)
 ---
 
 <header>
 	<nav class='navbar navbar-expand-lg bg-body-tertiary main-text height-nav'>
-		<div class='container-fluid'>
+		<div class='container-fluid h-100'>
 			<a class='navbar-brand' href={ROUTES.INDEX}>
 				<Image src={CoffeeIcon} alt='main header logo' />
 			</a>
@@ -25,19 +40,32 @@ import { ROUTES } from '../config/routes'
 			</button>
 			<div class='collapse navbar-collapse me-5' id='navbarNav'>
 				<ul class='navbar-nav'>
-					<li class='nav-item'>
-						<a class='nav-link' aria-current='page' href={ROUTES.MENU}>МЕНЮ</a
-						>
-					</li>
-					<!-- <li class='nav-item'>
-						<a class='nav-link' href='bonuspage.html'>БОНУСЫ</a>
-					</li> -->
-					<li class='nav-item'>
-						<a class='nav-link' href={ROUTES.ABOUT}>О НАС</a>
-					</li>
+					{
+						links.map(link => (
+							<li class='nav-item'>
+								<a
+									class:list={{
+										'nav-link': true,
+										active: link.route === url
+									}}
+									aria-current='page'
+									href={link.route}
+								>
+									{link.title.toUpperCase()}
+								</a>
+							</li>
+						))
+					}
 				</ul>
 			</div>
-			<div>add icons</div>
+			<div>
+				<a href={ROUTES.CART}>
+					<Cart class:list={{ c_950: url === ROUTES.CART }} />
+				</a>
+				<a href={ROUTES.PROFILE}>
+					<Profile class:list={{ c_950: url === ROUTES.PROFILE }} />
+				</a>
+			</div>
 		</div>
 	</nav>
 </header>

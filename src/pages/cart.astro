@@ -1,0 +1,32 @@
+---
+import CartItem from '../components/CartItem.astro'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title='Корзина'>
+	<section class='map-container'>
+		<div class='map-head line-header mb-4 d-flex f'>
+			<h1 class='ml-2'>Корзина</h1>
+		</div>
+		<div class='cont'>
+			<div>
+				<CartItem />
+			</div>
+			<div>cart info</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.f {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
+	.cont {
+		display: grid;
+		grid-template-columns: 1fr 500px;
+		gap: 10;
+	}
+</style>

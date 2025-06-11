@@ -7,6 +7,7 @@ import CardImage1 from '../assets/img/Adress-img.png'
 import CardImage2 from '../assets/img/bonus-img.png'
 import CardImage3 from '../assets/img/Menu-img.png'
 import Image from 'astro/components/Image.astro'
+import { ROUTES } from '../config/routes'
 ---
 
 <Layout>
@@ -67,7 +68,7 @@ import Image from 'astro/components/Image.astro'
 					</h4>
 				</div>
 				<div class='button-container mx-4 my-3'>
-					<a href='menupage.html' class='main-text'> Посмотерть </a>
+					<a href={ROUTES.MENU} class='main-text'> Посмотерть </a>
 				</div>
 			</div>
 			<div class='card'>
@@ -79,10 +80,10 @@ import Image from 'astro/components/Image.astro'
 					<h4 class='main-text'>Узнайте как попсать в нашу уютную кофейню</h4>
 				</div>
 				<div class='button-container mx-4 my-3'>
-					<a href='aboutpage.html' class='main-text'> Посмотерть </a>
+					<a href={ROUTES.ABOUT} class='main-text'> Посмотерть </a>
 				</div>
 			</div>
-			<div class='card'>
+			<!-- <div class='card'>
 				<div class='image-container my-4'>
 					<Image src={CardImage2} alt='Бонусы' title='Бонусы' />
 				</div>
@@ -92,10 +93,8 @@ import Image from 'astro/components/Image.astro'
 						Информация о акциях, рассылки и многое другое в нашем телеграмм боте
 					</h4>
 				</div>
-				<div class='button-container mx-4 my-3'>
-					<a href='bonuspage.html' class='main-text'> Посмотерть </a>
-				</div>
-			</div>
+				
+			</div> -->
 		</div>
 	</section>
 </Layout>

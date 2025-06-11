@@ -1,0 +1,95 @@
+---
+import { ROUTES } from '../config/routes'
+import TelegramImage from '../assets/img/telegram.svg'
+import VkImage from '../assets/img/vkontakte.svg'
+import Image from 'astro/components/Image.astro'
+---
+
+<footer class='site-footer mt-5'>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-sm-12 col-md-6'>
+				<h6>Гармония вкуса</h6>
+				<p class='text-justify'>
+					Добро пожаловать в кофейню "Гармония вкуса" – место, где каждый момент
+					становится особенным, а каждое блюдо дарит наслаждение. Уютная
+					атмосфера, аромат свежесваренного кофе и изысканные десерты создают
+					идеальное пространство для встреч с друзьями, деловых переговоров или
+					тихих часов наедине с собой.
+				</p>
+			</div>
+
+			<div class='col-xs-6 col-md-3'>
+				<h6>Навигация</h6>
+				<ul class='footer-links'>
+					<li><a href={ROUTES.INDEX}>Главная</a></li>
+					<li><a href={ROUTES.MENU}>Меню</a></li>
+					<li>
+						<a href={ROUTES.ABOUT}>Где нас найти</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- <div class='col-xs-6 col-md-3'>
+				<h6>Новостная рассылка</h6>
+				<p class='text-justify'></p>
+				<p></p>
+				<div class='input-group'>
+					<form class='email-group' action=''>
+						<input
+							type='text'
+							class='form-control input'
+							placeholder='Введите email...'
+						/>
+
+						<button class='btn mt-1 btn-brown' type='button'>
+							Подписаться
+						</button>
+					</form>
+				</div>
+			</div> -->
+		</div>
+		<hr />
+	</div>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-md-8 col-sm-6 col-xs-12'>
+				<p class='copyright-text'>
+					ИП Гаврилов &copy; 2024
+					<a href='infopage.html' style='text-decoration: underline'
+						>Правовая информация</a
+					>.
+				</p>
+			</div>
+
+			<div class='col-md-4 col-sm-6 col-xs-12'>
+				<ul class='social-icons'>
+					<li>
+						<a class='facebook' href='#'
+							><Image src={VkImage} width='32' alt='vkontakte' class='ico' /></a
+						>
+					</li>
+					<li>
+						<a class='twitter' href='#'
+							><Image
+								src={TelegramImage}
+								width='32'
+								alt='telegram'
+								class='ico'
+							/></a
+						>
+					</li>
+					<!-- <li>
+								<a class="dribbble" href="#"
+									><img
+										src="source/content/img/instagram.svg"
+										width="30"
+										class="ico"
+										alt="instagram"
+								/></a>
+							</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
