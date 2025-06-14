@@ -1,9 +1,19 @@
 ---
 import Image from 'astro/components/Image.astro'
-import CoffeeIcon from '../assets/img/Coffee.svg'
-import { ROUTES } from '../config/routes'
-import Profile from '../icons/Profile.astro'
-import Cart from '../icons/Cart.astro'
+import CoffeeIcon from '../../assets/img/Coffee.svg'
+import { ROUTES } from '../../config/routes'
+import Profile from '../../icons/Profile.astro'
+import Cart from '../../icons/Cart.astro'
+import HeaderIsland from './HeaderIsland.vue'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+if (typeof window !== 'undefined') {
+	const app = createApp(HeaderIsland)
+	const pinia = createPinia()
+	app.use(pinia)
+	app.mount('#header-island')
+}
 
 const links = [
 	{
@@ -25,7 +35,7 @@ console.log(url)
 	<nav class='navbar navbar-expand-lg bg-body-tertiary main-text height-nav'>
 		<div class='container-fluid h-100'>
 			<a class='navbar-brand' href={ROUTES.INDEX}>
-				<Image src={CoffeeIcon} alt='main header logo' />
+				<Image src={CoffeeIcon} alt='main header logo  ' />
 			</a>
 			<button
 				class='navbar-toggler'
@@ -59,19 +69,21 @@ console.log(url)
 				</ul>
 			</div>
 			<div>
-				<a href={ROUTES.CART}>
-					<Cart class:list={{ c_950: url === ROUTES.CART }} />
-				</a>
-				<a href={ROUTES.PROFILE}>
-					<Profile class:list={{ c_950: url === ROUTES.PROFILE }} />
-				</a>
+				<div class='d-flex gap-2'>
+					<a href={ROUTES.CART}>
+						<Cart class:list={{ c_950: url === ROUTES.CART }} />
+					</a>
+					<div id='header-island'>
+						<HeaderIsland client:load />
+					</div>
+				</div>
 			</div>
 		</div>
 	</nav>
-</header>
 
-<style>
-	.height-nav {
-		height: 100px;
-	}
-</style>
+	<style>
+		.height-nav {
+			height: 100px;
+		}
+	</style>
+</header>

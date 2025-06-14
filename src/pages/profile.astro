@@ -1,4 +1,6 @@
 ---
+import OrderList from '../components/Profile/OrderList.astro'
+import ProfileIsland from '../components/Profile/Vue/ProfileIsland.vue'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -7,5 +9,18 @@ import Layout from '../layouts/Layout.astro'
 		<div class='map-head line-header mb-4 d-flex f'>
 			<h1 class='ml-2'>Профиль</h1>
 		</div>
+		<div class='profile'>
+			<ProfileIsland client:load />
+			<OrderList />
+		</div>
 	</section>
 </Layout>
+
+<style>
+	.profile {
+		display: flex;
+		justify-content: start;
+		gap: 30px;
+		padding: 12px;
+	}
+</style>

@@ -1,0 +1,31 @@
+---
+import OrderCard from './OrderItem.astro'
+---
+
+<div>
+	<h1>Список заказов</h1>
+	<div class='order-list'>
+		<OrderCard
+			title='Заказ №321'
+			items={['Пицца Маргарита', 'Лимонад', 'Салат Цезарь']}
+			time='14:30'
+			status='Выполняется'
+			totalPrice={220}
+		/>
+		<OrderCard
+			title='Заказ №123'
+			items={['Пицца', 'Лимонад']}
+			time='15:45'
+			status='Готов'
+			totalPrice={980}
+		/>
+	</div>
+</div>
+
+<style>
+	.order-list {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 3px;
+	}
+</style>

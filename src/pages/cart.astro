@@ -1,5 +1,5 @@
 ---
-import CartItem from '../components/CartItem.astro'
+import CartIsland from '../components/Cart/Vue/CartIsland.vue'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -8,25 +8,6 @@ import Layout from '../layouts/Layout.astro'
 		<div class='map-head line-header mb-4 d-flex f'>
 			<h1 class='ml-2'>Корзина</h1>
 		</div>
-		<div class='cont'>
-			<div>
-				<CartItem />
-			</div>
-			<div>cart info</div>
-		</div>
+		<CartIsland client:load />
 	</section>
 </Layout>
-
-<style>
-	.f {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
-	.cont {
-		display: grid;
-		grid-template-columns: 1fr 500px;
-		gap: 10;
-	}
-</style>

@@ -1,4 +1,5 @@
 ---
+import MenuIsland from '../components/Menu/MenuIsland.vue'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -7,5 +8,6 @@ import Layout from '../layouts/Layout.astro'
 		<div class='map-head line-header mb-4 d-flex f'>
 			<h1 class='ml-2'>Меню</h1>
 		</div>
+		<MenuIsland client:load />
 	</section>
 </Layout>

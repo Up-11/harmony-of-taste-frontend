@@ -3,6 +3,9 @@ export const ROUTES = {
 	ABOUT: '/about',
 	MENU: '/menu',
 	CART: '/cart',
-	AUTH: '/auth',
+	AUTH: {
+		LOGIN: '/auth/login',
+		REGISTER: '/auth/register'
+	},
 	PROFILE: '/profile'
 }

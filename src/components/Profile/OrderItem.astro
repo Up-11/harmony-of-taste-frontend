@@ -1,0 +1,98 @@
+---
+export interface Props {
+	title?: string
+	items?: string[]
+	time?: string
+	status?: 'Новый' | 'Выполняется' | 'Готов' | 'Отменён' | 'Завершен'
+	totalPrice?: number
+}
+
+const {
+	title = 'Безымянный заказ',
+	items = ['Товар 1', 'Товар 2', 'Товар 3'],
+	time = '00:00',
+	status = 'Новый',
+	totalPrice = 0
+} = Astro.props
+---
+
+<div class='order-card'>
+	<h2 class='order-title'>{title}</h2>
+
+	<div class='order-info'>
+		<h3>Состав заказа:</h3>
+		<ul>
+			{items.map(item => <li>{item}</li>)}
+		</ul>
+
+		<p><strong>Время заказа:</strong> {time}</p>
+		<p>
+			<strong>Статус:</strong>
+			<span class={`status status-${status.toLowerCase()}`}>{status}</span>
+		</p>
+		<p><strong>Общая сумма:</strong> {totalPrice} ₽</p>
+	</div>
+</div>
+
+<style>
+	.order-card {
+		background-color: #faf7f2;
+		padding: 20px;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+		max-width: 500px;
+		margin: 16px auto;
+	}
+
+	.order-title {
+		margin: 0 0 12px;
+		font-size: 1.4rem;
+		color: #342116;
+	}
+
+	.order-info h3 {
+		margin: 0 0 8px;
+		font-size: 1.1rem;
+		color: #774f35;
+	}
+
+	.order-info ul {
+		padding-left: 20px;
+		margin: 0 0 12px;
+	}
+
+	.order-info p {
+		margin: 4px 0;
+		font-size: 0.95rem;
+	}
+
+	.status {
+		font-weight: bold;
+		padding: 2px 6px;
+		border-radius: 4px;
+	}
+
+	.status-новый {
+		background-color: #e0c097;
+		color: #5c3a1d;
+	}
+
+	.status-выполняется {
+		background-color: #f7d794;
+		color: #725b33;
+	}
+
+	.status-готов {
+		background-color: #a7e9af;
+		color: #22543d;
+	}
+
+	.status-отменён {
+		background-color: #f8b4b4;
+		color: #721c24;
+	}
+	.status-завершен {
+		background-color: #b4c6f8;
+		color: #1c2c72;
+	}
+</style>
