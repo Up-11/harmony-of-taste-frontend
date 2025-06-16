@@ -1,60 +1,67 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import {
+	ProductCategory,
+	type FiltersDtoType
+} from '../../api/products.service'
+
+const filterPayload = <T,>(value: T): Partial<{ value: T }> =>
+	value !== undefined && value !== null && value !== '' ? { value } : {}
+
+const emit = defineEmits<{ getFilteredProducts: [filters: FiltersDtoType] }>()
 
 const priceFrom = ref<number | null>(null)
 const priceTo = ref<number | null>(null)
-
-const productType = ref('')
 
 const category = ref('')
 
 const sortBy = ref('')
 
-const cookTime = ref('')
-
 const applyFilters = () => {
-	console.log({
-		priceFrom: priceFrom.value,
-		priceTo: priceTo.value,
-		productType: productType.value,
-		category: category.value,
-		sortBy: sortBy.value,
-		cookTime: cookTime.value
-	})
+	const payload = Object.fromEntries(
+		Object.entries({
+			priceFrom: priceFrom.value,
+			priceTo: priceTo.value,
+			category: category.value,
+			sortBy: sortBy.value
+		}).filter(
+			([_, value]) => value !== undefined && value !== null && value !== ''
+		)
+	)
+	console.log(payload)
+	emit('getFilteredProducts', payload)
 }
 </script>
 
 <template>
 	<div class="filters">
 		<h2>Фильтры:</h2>
-		<input v-model="priceFrom" type="number" placeholder="Цена от" />
-		<input v-model="priceTo" type="number" placeholder="Цена до" />
-
-		<select v-model="productType">
-			<option value="">Тип продукта</option>
-			<option value="еда">Еда</option>
-			<option value="кофе">Кофе</option>
-		</select>
+		<input
+			v-model="priceFrom"
+			:max="priceTo || 0"
+			type="number"
+			placeholder="Цена от"
+		/>
+		<input
+			v-model="priceTo"
+			:min="priceFrom || 0"
+			type="number"
+			placeholder="Цена до"
+		/>
 
 		<select v-model="category">
 			<option value="">Категория</option>
-			<option value="горячее">Горячие напитки</option>
-			<option value="холодное">Холодные напитки</option>
-			<option value="торты">Торты</option>
+			<option :value="ProductCategory.COFFEE">Кофе</option>
+			<option :value="ProductCategory.COLD_DRINK">Холодные напитки</option>
+			<option :value="ProductCategory.DESSERT">Десерты</option>
+			<option :value="ProductCategory.FOOD">Еда</option>
+			<option :value="ProductCategory.HOT_DRINK">Горячие напитки</option>
 		</select>
 
 		<select v-model="sortBy">
 			<option value="">Сортировка</option>
 			<option value="price-asc">По цене ↑</option>
 			<option value="price-desc">По цене ↓</option>
-		</select>
-
-		<select v-model="cookTime">
-			<option value="">Время готовки</option>
-			<option value="5">До 5 мин</option>
-			<option value="10">До 10 мин</option>
-			<option value="15">До 15 мин</option>
-			<option value="20">До 20 мин</option>
 		</select>
 
 		<button @click="applyFilters" class="btn-brown">Применить</button>

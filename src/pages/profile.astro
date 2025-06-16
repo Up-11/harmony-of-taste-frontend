@@ -1,5 +1,6 @@
 ---
 import OrderList from '../components/Profile/OrderList.astro'
+import OrderIsland from '../components/Profile/Vue/OrderIsland.vue'
 import ProfileIsland from '../components/Profile/Vue/ProfileIsland.vue'
 import Layout from '../layouts/Layout.astro'
 ---
@@ -11,7 +12,7 @@ import Layout from '../layouts/Layout.astro'
 		</div>
 		<div class='profile'>
 			<ProfileIsland client:load />
-			<OrderList />
+			<OrderIsland client:load />
 		</div>
 	</section>
 </Layout>

@@ -1,29 +1,35 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { Product } from './MenuIsland.vue'
+import formatUrl from '../../lib/formatUrl'
+import { ProductService } from '../../api/products.service'
+import { cartService } from '../../api/cart.service'
 
-const title = ref('Капучино 250мл')
-const price = ref(220)
-const cookTime = ref(5)
-const category = ref('Горячие напитки')
-const image = ref('https://via.placeholder.com/300x200?text=Фото+продукта')
+const props = defineProps<{ product: Product }>()
 
 const addToOrder = () => {
-	alert(`Добавлено в заказ: ${title.value}`)
+	const userToken = localStorage.getItem('userToken')
+	cartService.addCartItem(userToken!, { productId: props.product.id })
 }
 </script>
 
 <template>
 	<div class="product-card">
-		<img :src="image" :alt="title" class="product-image" />
+		<img
+			:src="formatUrl(product.imageUrl)"
+			:alt="product.title"
+			class="product-image"
+		/>
 
 		<div class="product-content">
-			<h3 class="product-title">{{ title }}</h3>
+			<h3 class="product-title">{{ product.title }}</h3>
 
-			<p class="product-category">{{ category }}</p>
+			<p class="product-category">{{ product.category }}</p>
+			<p class="product-category">{{ product.ingredients }}</p>
 
 			<div class="product-info">
-				<span class="product-price">{{ price }} ₽</span>
-				<span class="product-cooktime">⏱ {{ cookTime }} мин</span>
+				<span class="product-price">{{ product.price }} ₽</span>
+				<span class="product-cooktime"> {{ product.volume }} мл</span>
 			</div>
 			<button @click="addToOrder" class="btn-brown">В корзину</button>
 		</div>

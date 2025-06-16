@@ -3,24 +3,31 @@ import { createPinia, setActivePinia } from 'pinia'
 import { useAppStore } from '../../store/store'
 import { getCurrentInstance, onMounted, ref } from 'vue'
 import { ROUTES } from '../../config/routes'
+import { v4 as uuidv4 } from 'uuid'
 
 const store = ref()
 
 onMounted(() => {
+	const userToken = localStorage.getItem('userToken')
+	if (!userToken) {
+		const newToken = uuidv4()
+
+		localStorage.setItem('userToken', newToken)
+	}
 	const pinia = createPinia()
 	const app = getCurrentInstance()?.appContext.app
 	if (app) {
 		app.use(pinia)
 		setActivePinia(pinia)
 		store.value = useAppStore()
-		console.log('isAuth:', store.value.isAuth)
+		store.value.initializeAuth()
 	}
 })
 </script>
 
 <template>
 	<div v-if="store">
-		<div v-if="store.isAuth">
+		<div v-if="store.user.id">
 			<a :href="ROUTES.PROFILE">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"

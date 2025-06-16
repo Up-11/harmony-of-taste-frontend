@@ -1,29 +1,77 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ROUTES } from '../../config/routes'
+import { AuthService } from '../../api/auth.service'
+import { createPinia, setActivePinia } from 'pinia'
+import { getCurrentInstance, onMounted } from 'vue'
+import { useAppStore } from '../../store/store'
+import Cookies from 'js-cookie'
 
 const email = ref('')
 const name = ref('')
 const password = ref('')
+const loading = ref(false)
+const error = ref('')
+const store = ref()
 
-const handleLogin = () => {
-	console.log('Почта:', email.value)
-	console.log('Пароль:', password.value)
-	alert('Выполнен вход!')
+onMounted(() => {
+	const pinia = createPinia()
+	const app = getCurrentInstance()?.appContext.app
+	if (app) {
+		app.use(pinia)
+		setActivePinia(pinia)
+		store.value = useAppStore()
+	}
+})
+
+const handleRegister = async () => {
+	error.value = ''
+	loading.value = true
+	const userToken = localStorage.getItem('userToken')
+
+	try {
+		const res = await AuthService.register(
+			email.value,
+			name.value,
+			password.value,
+			userToken as string
+		)
+		if (res.user && res.accessToken) {
+			Cookies.set('accessToken', res.accessToken)
+			localStorage.setItem('user', JSON.stringify(res.user))
+			localStorage.setItem('userToken', res.user.userToken)
+			window.location.href = '/profile'
+		} else {
+			Cookies.remove('accessToken')
+			localStorage.removeItem('user')
+		}
+
+		// window.location.href = '/'
+	} catch (e: any) {
+		error.value = e.response?.data?.message || 'Ошибка регистрации'
+	} finally {
+		loading.value = false
+	}
 }
 </script>
 
 <template>
 	<div class="auth-form">
 		<h2>Регистрация</h2>
-		<form @submit.prevent="handleLogin">
+		<form @submit.prevent="handleRegister">
 			<label>
 				Имя:
-				<input v-model="name" type="text" placeholder="Введите имя" />
+				<input v-model="name" type="text" placeholder="Введите имя" required />
 			</label>
+
 			<label>
 				Почта:
-				<input v-model="email" type="email" placeholder="Введите почту" />
+				<input
+					v-model="email"
+					type="email"
+					placeholder="Введите почту"
+					required
+				/>
 			</label>
 
 			<label>
@@ -32,11 +80,17 @@ const handleLogin = () => {
 					v-model="password"
 					type="password"
 					placeholder="Введите пароль"
+					required
 				/>
 			</label>
 
-			<button type="submit">Войти</button>
+			<button type="submit" :disabled="loading">
+				{{ loading ? 'Регистрация...' : 'Зарегистрироваться' }}
+			</button>
 		</form>
+
+		<p v-if="error" class="text-red-500 mt-2">{{ error }}</p>
+
 		<p class="auth-toggle">
 			Уже зарегистрированы?
 			<a :href="ROUTES.AUTH.LOGIN"> Войти </a>

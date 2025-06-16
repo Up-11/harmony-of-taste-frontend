@@ -1,6 +1,6 @@
 [] - Menu
-[] - Корзина
-[] - Профиль
-[] - История заказов
+[] -filters 
+[] - add to cart 
+[] - remove from cart 
+[] -  increase deacrese cart items 
 [] - Оформление заказа
-[] - Авторизация

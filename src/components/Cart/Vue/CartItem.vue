@@ -1,36 +1,92 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { cartService } from '../../../api/cart.service'
+import formatUrl from '../../../lib/formatUrl'
+
 interface Props {
 	title: string
 	price: number
 	imageUrl: string
+	quantity: number
+	id: string
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<{ fetchCart: [] }>()
+const userToken = localStorage.getItem('userToken')
 const { title, price, imageUrl } = props
+
+const localQuantity = ref(props.quantity)
+const isLoading = ref(false)
+const error = ref<string | null>(null)
+
+const updateQuantity = async (operation: 'inc' | 'dec') => {
+	try {
+		isLoading.value = true
+		error.value = null
+
+		if (operation === 'inc') {
+			localQuantity.value++
+		} else {
+			if (localQuantity.value > 1) localQuantity.value--
+		}
+
+		const apiCall =
+			operation === 'inc'
+				? cartService.increaseCartItemQuantity
+				: cartService.decreaseCartItemQuantity
+
+		await apiCall(userToken!, props.id)
+	} catch (err) {
+		localQuantity.value = props.quantity
+		error.value =
+			err instanceof Error ? err.message : 'Ошибка при обновлении количества'
+		console.error('Quantity update error:', err)
+	} finally {
+		emit('fetchCart')
+		isLoading.value = false
+	}
+}
+
+const inc = () => updateQuantity('inc')
+const dec = () => updateQuantity('dec')
+
+const deleteItem = async () => {
+	await cartService.removeCartItem(userToken!, props.id)
+	emit('fetchCart')
+}
 </script>
 
 <template>
 	<div class="cart-item">
-		<!-- Информация о товаре -->
+		<div v-if="error" class="error-message">{{ error }}</div>
+
 		<div class="cart-item__info">
-			<img :src="imageUrl" :alt="title" class="cart-item__image" />
+			<img :src="formatUrl(imageUrl)" :alt="title" class="cart-item__image" />
 			<div>
-				<h3 class="cart-item__title">{{ title || 'tutle' }}</h3>
-				<p class="cart-item__price">Цена: {{ price || '2000' }} ₽</p>
+				<h3 class="cart-item__title">{{ title }}</h3>
+				<p class="cart-item__price">Цена: {{ price }} ₽</p>
 			</div>
 		</div>
 
 		<div class="cart-left">
 			<div class="cart-item__controls">
-				<button class="cart-item__button">−</button>
-				<span class="cart-item__count">1</span>
-				<button class="cart-item__button">+</button>
+				<button
+					@click="dec"
+					class="cart-item__button"
+					:disabled="isLoading || localQuantity <= 1"
+				>
+					−
+				</button>
+				<span class="cart-item__count">{{ localQuantity }}</span>
+				<button @click="inc" class="cart-item__button" :disabled="isLoading">
+					+
+				</button>
 			</div>
-			<button class="cart-item__delete">X</button>
+			<button class="cart-item__delete" @click="deleteItem">X</button>
 		</div>
 	</div>
 </template>
-
 <style scoped>
 .cart-left {
 	display: flex;

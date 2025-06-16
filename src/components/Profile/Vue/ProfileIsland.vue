@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { createPinia, setActivePinia } from 'pinia'
+import { getCurrentInstance, onMounted, ref } from 'vue'
+import { useAppStore } from '../../../store/store'
+import Cookies from 'js-cookie'
+import { AuthService } from '../../../api/auth.service'
 
 const name = ref('')
 const email = ref('')
@@ -10,6 +14,21 @@ const handleSubmit = () => {
 	console.log('Почта:', email.value)
 	console.log('Пароль:', password.value)
 	alert('Данные успешно отправлены!')
+}
+onMounted(() => {
+	const storedUser = localStorage.getItem('user')
+	if (storedUser) {
+		const NewUser = JSON.parse(storedUser)
+		name.value = NewUser.name
+		email.value = NewUser.email
+	} else {
+		window.location.href = '/'
+	}
+})
+
+const logout = () => {
+	AuthService.logout()
+	window.location.href = '/'
 }
 </script>
 
@@ -37,6 +56,7 @@ const handleSubmit = () => {
 			</label>
 
 			<button type="submit">Сохранить</button>
+			<button @click.prevent="logout">Выйти</button>
 		</form>
 	</div>
 </template>
