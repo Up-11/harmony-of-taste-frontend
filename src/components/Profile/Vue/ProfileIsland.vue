@@ -69,6 +69,7 @@ const logout = () => {
 	background: #faf7f2;
 	border-radius: 12px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	height: fit-content;
 }
 
 .profile-form h2 {

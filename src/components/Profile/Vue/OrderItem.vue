@@ -11,6 +11,7 @@ interface Props {
 	time?: string
 	status?: OrderStatus
 	totalPrice?: number
+	id: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -46,6 +47,7 @@ const getStatusClass = (status: OrderStatus) => {
 
 <template>
 	<div class="order-card">
+		<p class="order-title">Заказ #{{ id.slice(0, 4) }}</p>
 		<div class="order-info">
 			<h3>Состав заказа:</h3>
 			<div>

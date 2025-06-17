@@ -97,6 +97,7 @@ onMounted(() => {
 				v-for="order in orders"
 				:key="order.id"
 				:title="`Заказ #${order.id.slice(-4)}`"
+				:id="order.id"
 				:items="
 					order.items.map(item => ({
 						product: item.product,
