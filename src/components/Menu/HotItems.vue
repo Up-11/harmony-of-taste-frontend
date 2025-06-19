@@ -44,6 +44,7 @@ onMounted(() => {
 <style scoped>
 .recommended-section {
 	padding: 22px;
+	width: 100%;
 }
 
 .recommended-header {
@@ -76,5 +77,7 @@ onMounted(() => {
 	grid-template-columns: repeat(3, minmax(250px, 1fr));
 	gap: 10px;
 	justify-content: center;
+	margin-inline: auto;
+	justify-items: center;
 }
 </style>

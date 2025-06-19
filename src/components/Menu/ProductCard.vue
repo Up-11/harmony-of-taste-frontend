@@ -44,6 +44,7 @@ const addToOrder = () => {
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	min-width: 300px;
 	max-width: 300px;
 }
 
